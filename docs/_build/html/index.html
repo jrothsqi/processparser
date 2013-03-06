@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to processparser’s documentation! &mdash; processparser 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="processparser 1.0 documentation" href="#" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">processparser 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-processparser-s-documentation">
+<h1>Welcome to processparser&#8217;s documentation!<a class="headerlink" href="#welcome-to-processparser-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<span class="target" id="module-processparser"></span><div class="section" id="processparser">
+<h2>processparser<a class="headerlink" href="#processparser" title="Permalink to this headline">¶</a></h2>
+<p>Implements the processparser CherryPy instance.</p>
+<p>Requires Python 2.7.x (no current support for Python 3.x)</p>
+<p><strong>Required Python modules:</strong></p>
+<ul class="simple">
+<li><em>cherrypy</em>: CherryPy 3.2</li>
+<li><em>urllib2</em>: Included with Python as a base module</li>
+<li><em>json</em>: Included with Python as a base module</li>
+<li><em>pylibmc</em>: pylibmc 1.2.3</li>
+</ul>
+<p><strong>Required files:</strong></p>
+<ul class="simple">
+<li><em>baseprocess.txt</em>: Output of a &#8216;curl&#8217; pull of api.eresourcecenter.org/nvman/processes
+(used to seed the taxonomy structure generator and as a source of &#8220;stale&#8221; data if the API server is down)</li>
+<li><em>config.conf</em>: A cherrypy configuration options file (default setup is for this file to be blank)</li>
+</ul>
+<p><strong>External dependencies:</strong></p>
+<ul class="simple">
+<li><em>memcached</em>: Lastest stable memcached listening on 127.0.0.1:11211</li>
+</ul>
+<p><strong>CherryPy server information:</strong></p>
+<ul class="simple">
+<li>Uses CherryPy&#8217;s quickstart() function to spawn a server on 127.0.0.1:8080</li>
+</ul>
+</div>
+<dl class="function">
+<dt id="processparser.startHTML">
+<tt class="descclassname">processparser.</tt><tt class="descname">startHTML</tt><big>(</big><em>title='FriendlyVault'</em><big>)</big><a class="headerlink" href="#processparser.startHTML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the HTML opening tags on each page</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>title</strong> &#8211; The contents of the html &lt;title&gt; tag (default &#8220;FriendlyVault&#8221;)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="processparser.startJS">
+<tt class="descclassname">processparser.</tt><tt class="descname">startJS</tt><big>(</big><em>thelist=</em><span class="optional">[</span><span class="optional">]</span>, <em>thelist2=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#processparser.startJS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the Google Chart Tools pie chart Javascript code on process information pages where at least one supplier supports that process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>thelist</strong> &#8211; A list in format [&#8216;Suppliers with processTitle&#8217;, int number_with_process]</li>
+<li><strong>thelist2</strong> &#8211; A list in format [&#8216;Suppliers without processTitle&#8217;, int number_without_process]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="processparser.startJSone">
+<tt class="descclassname">processparser.</tt><tt class="descname">startJSone</tt><big>(</big><em>thelist=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#processparser.startJSone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the Google Chart Tools pie chart Javascript code on process information pages where no suppliers support that process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>thelist</strong> &#8211; A list in format [&#8216;Suppliers without processTitle&#8217;, int number_without_process]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="processparser.endHTML">
+<tt class="descclassname">processparser.</tt><tt class="descname">endHTML</tt><big>(</big><em>showBack=True</em><big>)</big><a class="headerlink" href="#processparser.endHTML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the HTML closing tags on each page (including total number of entries across all suppliers and stale data notification if necessary)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>showBack</strong> &#8211; If showBack is False, the &#8220;[back]&#8221; link will not appear at the bottom of the page</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="processparser.restoreMem">
+<tt class="descclassname">processparser.</tt><tt class="descname">restoreMem</tt><big>(</big><big>)</big><a class="headerlink" href="#processparser.restoreMem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reinitializes the memcached entries when they have expired (using the api.resourcecenter.org/nvman/processes JSON or, if not able to contact the server, the baseprocess.txt JSON)</p>
+<p>If using the baseprocess.txt JSON, also adds a memcached entry reflecting the fact that the displayed process information uses stale data</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="processparser.rootdex">
+<em class="property">class </em><tt class="descclassname">processparser.</tt><tt class="descname">rootdex</tt><a class="headerlink" href="#processparser.rootdex" title="Permalink to this definition">¶</a></dt>
+<dd><p>CherryPy class for the app index page</p>
+<dl class="method">
+<dt id="processparser.rootdex.index">
+<tt class="descname">index</tt><big>(</big><big>)</big><a class="headerlink" href="#processparser.rootdex.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the index page with a list of links to all processes found in the baseprocess.txt JSON</p>
+<p><em>Corresponds to URI /app</em></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="processparser.viewdex">
+<em class="property">class </em><tt class="descclassname">processparser.</tt><tt class="descname">viewdex</tt><a class="headerlink" href="#processparser.viewdex" title="Permalink to this definition">¶</a></dt>
+<dd><p>CherryPy class for individual process information pages</p>
+<dl class="method">
+<dt id="processparser.viewdex.index">
+<tt class="descname">index</tt><big>(</big><big>)</big><a class="headerlink" href="#processparser.viewdex.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>If URI is formed incorrectly, displays &#8220;Unknown&#8221; and exits</p>
+<p><em>Corresponds to URI /app/viewer</em></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="processparser.viewdex.view">
+<tt class="descname">view</tt><big>(</big><em>object='invalidkey'</em><big>)</big><a class="headerlink" href="#processparser.viewdex.view" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a process is specified using the below URI format, generates the process information page</p>
+<p>Queries memcached for process information. If memcached entries have expired (detected by requesting information on manufacturingProcesses), calls restoreMem() to regenerate them, then continues generating the page</p>
+<p>If requested process does not exist, or no processKey was passed in the URI, displays &#8220;Invalid key.&#8221; and exits</p>
+<p>Page generated includes information on:</p>
+<ul class="simple">
+<li>Percentage of suppliers supporting the process</li>
+<li>Link to the process&#8217;s documentation page</li>
+<li>Link to parent process</li>
+<li>Links to child processes (if any)</li>
+<li>Google Charts Tool pie chart</li>
+</ul>
+<p><em>Corresponds to URI /app/viewer/view/processKey</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>object</strong> &#8211; CherryPy generated object containing processKey</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to processparser&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#processparser">processparser</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">processparser 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Joshua Roth-Colson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

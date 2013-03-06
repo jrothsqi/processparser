@@ -21,6 +21,10 @@ Run `python processparser.py` from a non-privileged account (such as www-data).
 
 Server will begin listening on 127.0.0.1:8080
 
+**View live usage:**
+
+A live version of processparser can be seen at http://www.friendlyvault.com/app/
+
 **Documentation:**
 
 Sphinx-generated documentation available at:

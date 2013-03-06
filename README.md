@@ -5,15 +5,15 @@ An unofficial cherrypy-based parser of RfD taxonomy process data using the NVMAN
 
 Requires:
 
-Python 2.7.x (no support for Python 3.x)
-CherryPy 3.2
-pylibmc (tested on pylibmc 1.2.3)
-memcached (tested on latest stable version; set to listen on 127.0.0.1:11211)
+* Python 2.7.x (no support for Python 3.x)
+* CherryPy 3.2
+* pylibmc (tested on pylibmc 1.2.3)
+* memcached (tested on latest stable version; set to listen on 127.0.0.1:11211)
 
 File requirements:
 
-baseprocess.txt: The output from `curl http://api.eresourcecenter.org/nvman/processes` (should be updated if new processes/categories are added)
-config.conf: A CherryPy configuration file (in most cases, this file should have no text in it)
+* baseprocess.txt: The output from `curl http://api.eresourcecenter.org/nvman/processes` (should be updated if new processes/categories are added)
+* config.conf: A CherryPy configuration file (in most cases, this file should have no text in it)
 
 Usage:
 

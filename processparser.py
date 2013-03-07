@@ -26,7 +26,7 @@ Requires Python 2.7.x (no current support for Python 3.x)
 * *cherrypy*: CherryPy 3.2
 * *urllib2*: Included with Python as a base module
 * *json*: Included with Python as a base module
-* *pylibmc*: pylibmc 1.2.3
+* *pylibmc*: Tested on pylibmc 1.2.2
 
 **Required files:**
 

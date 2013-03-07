@@ -21,6 +21,7 @@ Before running for the first time, open processparser.py in a text editor and ch
  to reflect the location of baseprocess.txt:
 
 `filehere = open("/var/pythondev/baseprocess.txt", "r")`
+
 Run `python processparser.py` from a non-privileged account (such as www-data).
 
 Server will begin listening on 127.0.0.1:8080

@@ -5,9 +5,9 @@ An unofficial, open-source CherryPy-based parser of RfD taxonomy process data us
 
 **Requires:**
 
-* Python 2.7.x (no support for Python 3.x)
+* Python 2.7.x (no current support for Python 3.x)
 * CherryPy 3.2
-* pylibmc (tested on pylibmc 1.2.3)
+* pylibmc (tested on pylibmc 1.2.2)
 * memcached (tested on latest stable version; set to listen on 127.0.0.1:11211)
 
 **File requirements:**

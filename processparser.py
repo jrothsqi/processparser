@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03062013-1
+# processparser 1.0 revision 03062013-2
 """
 processparser
 -------------
@@ -118,6 +118,9 @@ def endHTML(showBack=True):
 	"""
 	mc = pylibmc.Client(["127.0.0.1"], binary=True)
 	thecount = mc.get("count")
+	if not thecount:
+		restoreMem()
+		thecount = mc.get("count")
 	if showBack:
 		rethere = "\n<div style='text-align:center'><a href='/app/'>[back]</a><br /><br /><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p></div>\n</body></html>" % (thecount)
 	else:

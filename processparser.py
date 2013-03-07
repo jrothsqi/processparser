@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03072013-1
+# processparser 1.0 revision 03072013-2
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -47,6 +47,10 @@ import cherrypy
 import urllib2
 import json
 import pylibmc
+
+# If baseprocessUpdateAuto is True, baseprocess.txt will update each time restoreMem() is called
+# (as long as API server is available).
+baseprocessUpdateAuto = False
 
 filehere = open("baseprocess.txt", "r")
 lines = filehere.read()
@@ -148,13 +152,23 @@ def restoreMem():
 
 	If using the baseprocess.txt JSON, also adds a memcached entry reflecting the fact that the displayed process information uses stale data
 	"""
-	print "Regenerating Memcached Entries"
+	print "NOTICE: Regenerating Memcached Entries"
 	mc = pylibmc.Client(["127.0.0.1"], binary=True)
 	try:
 		thereq = urllib2.urlopen('http://api.eresourcecenter.org/nvman/processes')
 		#thereq = urllib2.urlopen('https://www.dataonfriends.com/process.json')
 		#above line can be uncommented (and previous thereq line commented) to force processparser to serve stale data only (file is guaranteed never to exist)
-		thejson = json.loads(thereq.read())
+		rawjson = thereq.read()
+		thejson = json.loads(rawjson)
+		if baseprocessUpdateAuto:
+			try:
+				updateHandle = file('baseprocess.txt', 'w')
+				updateHandle.write(rawjson)
+				updateHandle.close()
+				basejson = thejson
+				print "NOTICE: baseprocess.txt updated successfully."
+			except:
+				print "WARNING: Attempted to write baseprocess.txt, but could not. Permissions error?"
 	except:
 		thejson = basejson
 		stale = "yes"

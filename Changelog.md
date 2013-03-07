@@ -1,6 +1,13 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03072013-2*
+-------------------------
+
+* New option added to update baseprocess.txt with every API server HTTP
+ request. To enable, change baseprocessUpdateAuto to True in
+ processparser.py (found below the import statements).
+
 *1.0 revision 03072013-1*
 -------------------------
 

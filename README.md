@@ -1,7 +1,7 @@
 processparser
 =============
 
-An unofficial cherrypy-based parser of RfD taxonomy process data using the NVMAN Analytics HTTP-based API.
+An unofficial, open-source CherryPy-based parser of RfD taxonomy process data using the NVMAN HTTP-based API.
 
 **Requires:**
 
@@ -36,3 +36,19 @@ http://www.friendlyvault.com/docs/
 Joshua Roth-Colson (joshua@friendlyvault.com)
 
 Please note: processparser is a personal project and is not officially approved by, or a product of, my employer
+
+**License:**
+
+Copyright 2013, Joshua Roth-Colson
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

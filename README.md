@@ -17,10 +17,10 @@ An unofficial, open-source CherryPy-based parser of RfD taxonomy process data us
 
 **Usage:**
 
-Before running for the first time, open processparser.py in a text editor and change the following line (immediately after the import statements)
- to reflect the location of baseprocess.txt:
+Before running for the first time, if you have placed baseprocess.txt in a different directory than the python script, open processparser.py in a text
+ editor and change the following line (immediately after the import statements) to reflect its location:
 
-`filehere = open("/var/pythondev/baseprocess.txt", "r")`
+`filehere = open("baseprocess.txt", "r")`
 
 Run `python processparser.py` from a non-privileged account (such as www-data).
 

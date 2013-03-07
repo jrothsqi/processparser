@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03062013-2
+# processparser 1.0 revision 03062013-3
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -36,7 +36,7 @@ Requires Python 2.7.x (no current support for Python 3.x)
 
 **External dependencies:**
 
-* *memcached*: Lastest stable memcached listening on 127.0.0.1:11211
+* *memcached*: Latest stable memcached listening on 127.0.0.1:11211
 
 **CherryPy server information:**
 
@@ -48,7 +48,7 @@ import urllib2
 import json
 import pylibmc
 
-filehere = open("/var/pythondev/baseprocess.txt", "r")
+filehere = open("baseprocess.txt", "r")
 lines = filehere.read()
 filehere.close()
 basejson = json.loads(lines)

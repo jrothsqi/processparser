@@ -1,6 +1,12 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03072013-1*
+-------------------------
+
+* Default value for title in StartHTML() is now "ProcessParser" instead
+ of "FriendlyVault".
+
 *1.0 revision 03062013-3*
 -------------------------
 

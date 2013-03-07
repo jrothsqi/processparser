@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03062013-3
+# processparser 1.0 revision 03072013-1
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -53,11 +53,11 @@ lines = filehere.read()
 filehere.close()
 basejson = json.loads(lines)
 
-def startHTML(title="FriendlyVault"):
+def startHTML(title="ProcessParser"):
 	"""
 	Generates the HTML opening tags on each page
 
-	:param title: The contents of the html <title> tag (default "FriendlyVault")
+	:param title: The contents of the html <title> tag (default "ProcessParser")
 	"""
 	rethere = '''
 		<!DOCTYPE html>\n<html><head><meta charset="UTF-8"><style type="text/css">a { color: blue; } a#visited { color: blue; }</style>

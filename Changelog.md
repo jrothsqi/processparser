@@ -1,6 +1,13 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03102013-2*
+-------------------------
+
+* Location of local text file containing curl output (default file
+ is "baseprocess.txt") is now configurable. See configuration information
+ below the import statements.
+
 *1.0 revision 03102013-1*
 -------------------------
 

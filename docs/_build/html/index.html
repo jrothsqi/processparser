@@ -66,8 +66,9 @@
 </ul>
 <p><strong>Required files:</strong></p>
 <ul class="simple">
-<li><em>baseprocess.txt</em>: Output of a &#8216;curl&#8217; pull of api.eresourcecenter.org/nvman/processes
-(used to seed the taxonomy structure generator and as a source of &#8220;stale&#8221; data if the API server is down)</li>
+<li><em>processFile</em>: Output of a &#8216;curl&#8217; pull of api.eresourcecenter.org/nvman/processes (default is
+&#8220;baseprocess.txt&#8221; in same directory as processparser.py - used to seed the taxonomy structure
+generator and as a source of &#8220;stale&#8221; data if the API server is down)</li>
 <li><em>config.conf</em>: A cherrypy configuration options file (default setup is for this file to be blank)</li>
 </ul>
 <p><strong>External dependencies:</strong></p>
@@ -142,8 +143,8 @@
 <dl class="function">
 <dt id="processparser.restoreMem">
 <tt class="descclassname">processparser.</tt><tt class="descname">restoreMem</tt><big>(</big><big>)</big><a class="headerlink" href="#processparser.restoreMem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reinitializes the memcached entries when they have expired (using the api.resourcecenter.org/nvman/processes JSON or, if not able to contact the server, the baseprocess.txt JSON)</p>
-<p>If using the baseprocess.txt JSON, also adds a memcached entry reflecting the fact that the displayed process information uses stale data</p>
+<dd><p>Reinitializes the memcached entries when they have expired (using the api.resourcecenter.org/nvman/processes JSON or, if not able to contact the server, the processFile JSON)</p>
+<p>If using the processFile JSON, also adds a memcached entry reflecting the fact that the displayed process information uses stale data</p>
 </dd></dl>
 
 <dl class="class">
@@ -153,7 +154,7 @@
 <dl class="method">
 <dt id="processparser.rootdex.index">
 <tt class="descname">index</tt><big>(</big><big>)</big><a class="headerlink" href="#processparser.rootdex.index" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the index page with a list of links to all processes found in the baseprocess.txt JSON</p>
+<dd><p>Generates the index page with a list of links to all processes found in the processFile JSON</p>
 <p><em>Corresponds to URI /app</em></p>
 </dd></dl>
 

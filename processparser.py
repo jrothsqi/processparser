@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03102013-1
+# processparser 1.0 revision 03102013-2
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -30,8 +30,9 @@ Requires Python 2.7.x (no current support for Python 3.x)
 
 **Required files:**
 
-* *baseprocess.txt*: Output of a 'curl' pull of api.eresourcecenter.org/nvman/processes
-  (used to seed the taxonomy structure generator and as a source of "stale" data if the API server is down)
+* *processFile*: Output of a 'curl' pull of api.eresourcecenter.org/nvman/processes (default is
+  "baseprocess.txt" in same directory as processparser.py - used to seed the taxonomy structure
+  generator and as a source of "stale" data if the API server is down)
 * *config.conf*: A cherrypy configuration options file (default setup is for this file to be blank)
 
 **External dependencies:**
@@ -50,7 +51,7 @@ import pylibmc
 
 # CONFIG SECTION BEGIN
 
-# If baseprocessUpdateAuto is True, baseprocess.txt will update each time restoreMem() is called
+# If baseprocessUpdateAuto is True, processFile will update each time restoreMem() is called
 # (as long as API server is available).
 baseprocessUpdateAuto = False
 
@@ -61,9 +62,12 @@ googleAnalyticsFile = "analytics.txt"
 # To display debug messages, set the below variable to True
 debugDisplay = False
 
+# Put curl output filename below (default is "baseprocess.txt").
+processFile = "baseprocess.txt"
+
 # CONFIG SECTION END
 
-filehere = open("baseprocess.txt", "r")
+filehere = open(processFile, "r")
 lines = filehere.read()
 filehere.close()
 basejson = json.loads(lines)
@@ -169,9 +173,9 @@ def endHTML(showBack=True):
 
 def restoreMem():
 	"""
-	Reinitializes the memcached entries when they have expired (using the api.resourcecenter.org/nvman/processes JSON or, if not able to contact the server, the baseprocess.txt JSON)
+	Reinitializes the memcached entries when they have expired (using the api.resourcecenter.org/nvman/processes JSON or, if not able to contact the server, the processFile JSON)
 
-	If using the baseprocess.txt JSON, also adds a memcached entry reflecting the fact that the displayed process information uses stale data
+	If using the processFile JSON, also adds a memcached entry reflecting the fact that the displayed process information uses stale data
 	"""
 	print "NOTICE: Regenerating Memcached Entries"
 	mc = pylibmc.Client(["127.0.0.1"], binary=True)
@@ -183,13 +187,13 @@ def restoreMem():
 		thejson = json.loads(rawjson)
 		if baseprocessUpdateAuto:
 			try:
-				updateHandle = file('baseprocess.txt', 'w')
+				updateHandle = file(processFile, 'w')
 				updateHandle.write(rawjson)
 				updateHandle.close()
 				basejson = thejson
-				print "NOTICE: baseprocess.txt updated successfully."
+				print "NOTICE: processFile updated successfully."
 			except:
-				print "WARNING: Attempted to write baseprocess.txt, but could not. Permissions error?"
+				print "WARNING: Attempted to write processFile, but could not. Permissions error?"
 	except:
 		thejson = basejson
 		stale = "yes"
@@ -223,7 +227,7 @@ class rootdex:
 	""" CherryPy class for the app index page """
 	def index(self):
 		"""
-		Generates the index page with a list of links to all processes found in the baseprocess.txt JSON
+		Generates the index page with a list of links to all processes found in the processFile JSON
 
 		*Corresponds to URI /app*
 		"""

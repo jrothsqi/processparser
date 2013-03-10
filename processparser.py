@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03072013-2
+# processparser 1.0 revision 03102013-1
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -48,14 +48,34 @@ import urllib2
 import json
 import pylibmc
 
+# CONFIG SECTION BEGIN
+
 # If baseprocessUpdateAuto is True, baseprocess.txt will update each time restoreMem() is called
 # (as long as API server is available).
 baseprocessUpdateAuto = False
+
+# Define the below variable with the name of a file if you wish to include Google Analytics code
+# in each page. Leave as default if you do not (if file doesn't exist, nothing is added).
+googleAnalyticsFile = "analytics.txt"
+
+# To display debug messages, set the below variable to True
+debugDisplay = False
+
+# CONFIG SECTION END
 
 filehere = open("baseprocess.txt", "r")
 lines = filehere.read()
 filehere.close()
 basejson = json.loads(lines)
+
+gtrackcode = ""
+try:
+	gtrackfile = open(googleAnalyticsFile, "r")
+	gtrackcode = gtrackfile.read()
+	gtrackfile.close()
+except:
+	if debugDisplay:
+		print "DEBUG: Analytics file not found."
 
 def startHTML(title="ProcessParser"):
 	"""
@@ -141,9 +161,10 @@ def endHTML(showBack=True):
 		restoreMem()
 		thecount = mc.get("count")
 	if showBack:
-		rethere = "\n<div style='text-align:center'><a href='/app/'>[back]</a><br /><br /><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p></div>\n</body></html>" % (thecount)
+		rethere = "\n<div style='text-align:center'><a href='/app/'>[back]</a><br /><br /><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p></div>\n" % (thecount)
 	else:
-		rethere = "\n<br /><br /><div style='text-align:center'><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p></div></body></html>" % (thecount)
+		rethere = "\n<br /><br /><div style='text-align:center'><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p></div>" % (thecount)
+	rethere += "%s</body></html>" % (gtrackcode)
 	return rethere
 
 def restoreMem():

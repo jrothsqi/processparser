@@ -1,6 +1,15 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03102013-1*
+-------------------------
+
+* Google Analytics support now available. See configuration information
+ below the import statements.
+
+* Added option for printing DEBUG messages (number is currently limited,
+ but more will be available as development continues).
+
 *1.0 revision 03072013-2*
 -------------------------
 

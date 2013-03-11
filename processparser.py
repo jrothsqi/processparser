@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03102013-2
+# processparser 1.0 revision 03102013-3
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -53,7 +53,7 @@ import pylibmc
 
 # If baseprocessUpdateAuto is True, processFile will update each time restoreMem() is called
 # (as long as API server is available).
-baseprocessUpdateAuto = False
+baseprocessUpdateAuto = True
 
 # Define the below variable with the name of a file if you wish to include Google Analytics code
 # in each page. Leave as default if you do not (if file doesn't exist, nothing is added).

@@ -1,6 +1,14 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03102013-3*
+-------------------------
+
+* Default value for baseprocessUpdateAuto is now "True" (will update
+ processFile every time restoreMem() is called if possible). When this
+ option is enabled, you will receive automatic updates when new processes
+ or categories are added to the taxonomy.
+
 *1.0 revision 03102013-2*
 -------------------------
 

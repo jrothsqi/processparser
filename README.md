@@ -15,7 +15,12 @@ An unofficial, open-source CherryPy-based parser of RfD taxonomy process data us
 * processFile: The output from `curl http://api.eresourcecenter.org/nvman/processes` (default is
   "baseprocess.txt" - should be updated if new processes/categories are added and baseprocessUpdateAuto
   is not enabled in the configuration section). 
-* config.conf: A CherryPy configuration file (in most cases, this file should have no text in it)
+
+**Optional configuration file:**
+
+* config.conf: If config.conf exists, processparser will load it as optional CherryPy configuration
+  directives. This file can be safely omitted or left blank if you do not have special CherryPy
+  configuration options (needing such options is very rare).
 
 **Usage:**
 

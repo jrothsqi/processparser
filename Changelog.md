@@ -1,6 +1,11 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03102013-4*
+-------------------------
+
+* CherryPy "config.conf" file now optional.
+
 *1.0 revision 03102013-3*
 -------------------------
 

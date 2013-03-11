@@ -69,7 +69,12 @@
 <li><em>processFile</em>: Output of a &#8216;curl&#8217; pull of api.eresourcecenter.org/nvman/processes (default is
 &#8220;baseprocess.txt&#8221; in same directory as processparser.py - used to seed the taxonomy structure
 generator and as a source of &#8220;stale&#8221; data if the API server is down)</li>
-<li><em>config.conf</em>: A cherrypy configuration options file (default setup is for this file to be blank)</li>
+</ul>
+<p><strong>Optional files:</strong></p>
+<ul class="simple">
+<li><em>config.conf</em>: If config.conf exists, processparser will load the directives inside of it as
+a CherryPy configuration set. This file is in the same format as cherrpy.config.update()
+directives, and can be safely omitted in most cases.</li>
 </ul>
 <p><strong>External dependencies:</strong></p>
 <ul class="simple">

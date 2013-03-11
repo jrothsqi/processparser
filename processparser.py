@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03102013-3
+# processparser 1.0 revision 03102013-4
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -13,6 +13,7 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+
 
 """
 processparser
@@ -330,7 +331,10 @@ class viewdex:
 	index.exposed = True
 	view.exposed = True
 
-cherrypy.config.update("config.conf")
+try:
+	cherrypy.config.update("config.conf")
+except:
+	pass
 
 cherrypy.tree.mount(rootdex(), "/app")
 cherrypy.tree.mount(viewdex(), "/app/viewer")

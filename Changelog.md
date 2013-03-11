@@ -1,6 +1,11 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03102013-7*
+-------------------------
+
+* Reformatted code to conform to PEP-8
+
 *1.0 revision 03102013-6*
 -------------------------
 

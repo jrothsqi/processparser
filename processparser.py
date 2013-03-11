@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03102013-5
+# processparser 1.0 revision 03102013-6
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -225,7 +225,7 @@ def restoreMem():
 		mc.set(str(herenumber), str(thenumber), time=1800)
 		mc.set(str(heredoc), str(thedoc), time=1800)
 		mc.set(str(herepar), str(thepar), time=1800)
-		mc.set(str(countkey), str(counting), time=1800)
+	mc.set(str(countkey), str(counting), time=1800)
         return 1
 
 class rootdex:

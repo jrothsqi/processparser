@@ -1,6 +1,11 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03102013-6*
+-------------------------
+
+* Reduced number of memcached set commands
+
 *1.0 revision 03102013-5*
 -------------------------
 

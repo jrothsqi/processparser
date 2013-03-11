@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03102013-4
+# processparser 1.0 revision 03102013-5
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -34,7 +34,12 @@ Requires Python 2.7.x (no current support for Python 3.x)
 * *processFile*: Output of a 'curl' pull of api.eresourcecenter.org/nvman/processes (default is
   "baseprocess.txt" in same directory as processparser.py - used to seed the taxonomy structure
   generator and as a source of "stale" data if the API server is down)
-* *config.conf*: A cherrypy configuration options file (default setup is for this file to be blank)
+
+**Optional files:**
+
+* *config.conf*: If config.conf exists, processparser will load the directives inside of it as
+  a CherryPy configuration set. This file is in the same format as cherrpy.config.update()
+  directives, and can be safely omitted in most cases.
 
 **External dependencies:**
 
@@ -202,8 +207,7 @@ def restoreMem():
 		mc.set(str(stalekey), str(stale), time=1800)
 	counting = 0
 	countkey = "count"
-	for counthere in thejson["entries"]:
-		counting += int(thejson["entries"][counthere])
+	counting = thejson["entries"]["total"]
 	for nowjson in thejson["processes"]:
 		heretitle = nowjson + "-" + "title"
 		herenumber = nowjson + "-" + "number"

@@ -1,6 +1,11 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03102013-5*
+-------------------------
+
+* Bug fix: Number of entries displayed in footer was incorrect.
+
 *1.0 revision 03102013-4*
 -------------------------
 

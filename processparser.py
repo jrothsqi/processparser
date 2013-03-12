@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03102013-6
+# processparser 1.0 revision 03122013-1
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -69,6 +69,9 @@ googleAnalyticsFile = "analytics.txt"
 # To display debug messages, set the below variable to True
 debugDisplay = False
 
+# To display ProcessParser github and docs link in footer, set to True
+footerFull = True
+
 # Put curl output filename below (default is "baseprocess.txt").
 processFile = "baseprocess.txt"
 
@@ -97,6 +100,7 @@ def startHTML(title="ProcessParser"):
     """
     rethere = '''
 		<!DOCTYPE html>\n<html><head><meta charset="UTF-8"><style type="text/css">a { color: blue; } a#visited { color: blue; }</style>
+		<meta name="google-site-verification" content="iWMw5Skh-sq27GxIfIVm6xPBUik8h4-edphq6DOmlXg" />
                 <script src="https://www.google.com/jsapi"></script><title>%s</title>
 		</head><body>\n
 		  '''  % (title)
@@ -177,12 +181,14 @@ def endHTML(showBack=True):
         restoreMem()
         thecount = mc.get("count")
     if showBack:
-        rethere = "\n<div style='text-align:center'><a href='/app/'>[back]</a><br /><br /><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p></div>\n" % (
+        rethere = "\n<div style='text-align:center'><a href='/app/'>[back]</a><br /><br /><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p>" % (
             thecount)
     else:
-        rethere = "\n<br /><br /><div style='text-align:center'><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p></div>" % (
+        rethere = "\n<br /><br /><div style='text-align:center'><p>Currently utilizing %s entries.</p><p>&copy; 2013, Joshua Roth-Colson</p>" % (
             thecount)
-    rethere += "%s</body></html>" % (gtrackcode)
+    if footerFull:
+        rethere += "<p><a href='https://github.com/jrothsqi/processparser'>Find ProcessParser on Github</a></p>\n<p><a href='https://www.friendlyvault.com/docs/'>ProcessParser documentation</a></p>"
+    rethere += "</div>%s</body></html>" % (gtrackcode)
     return rethere
 
 
@@ -217,7 +223,6 @@ def restoreMem():
         stale = "yes"
         stalekey = "stale"
         mc.set(str(stalekey), str(stale), time=1800)
-    counting = 0
     countkey = "count"
     counting = thejson["entries"]["total"]
     for nowjson in thejson["processes"]:

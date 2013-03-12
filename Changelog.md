@@ -1,6 +1,15 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03122013-1*
+-------------------------
+
+* New configuration option (footerFull) - If enabled,
+ shows processparser Github and documentation link
+ in footer
+
+* Minor code cleanup for efficiency
+
 *1.0 revision 03102013-7*
 -------------------------
 

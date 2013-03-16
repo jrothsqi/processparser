@@ -34,13 +34,13 @@ Server will begin listening on 127.0.0.1:8080
 
 **View live usage:**
 
-A live version of processparser can be seen at http://www.friendlyvault.com/app/
+A live version of processparser can be seen at https://www.friendlyvault.com/app/
 
 **Documentation:**
 
 Sphinx-generated documentation available at:
 
-http://www.friendlyvault.com/docs/
+https://www.friendlyvault.com/docs/
 
 **Developer:**
 

@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03292013-1
+# processparser 1.0 revision 03292013-2
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -330,7 +330,7 @@ class viewdex:
                 if text == 0:
                     thehasnot = "Suppliers Without " + \
                         title + " (" + str(numtotal) + ")"
-                    dicttopass[thehasnot] = int(mctest)
+                    dicttopass[thehasnot] = int(numtotal)
                     retval += startJS(dicttopass)
                 else:
                     thehas = "Suppliers With " + title + " (" + str(text) + ")"

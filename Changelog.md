@@ -1,6 +1,11 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03292013-2*
+-------------------------
+
+* Minor correction in variable usage
+
 *1.0 revision 03292013-1*
 -------------------------
 

@@ -17,8 +17,6 @@ Contents:
 
 .. autofunction:: startJS
 
-.. autofunction:: startJSone
-
 .. autofunction:: endHTML
 
 .. autofunction:: restoreMem

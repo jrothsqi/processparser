@@ -101,31 +101,13 @@ directives, and can be safely omitted in most cases.</li>
 
 <dl class="function">
 <dt id="processparser.startJS">
-<tt class="descclassname">processparser.</tt><tt class="descname">startJS</tt><big>(</big><em>thelist=</em><span class="optional">[</span><span class="optional">]</span>, <em>thelist2=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#processparser.startJS" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">processparser.</tt><tt class="descname">startJS</tt><big>(</big><em>workingdict</em><big>)</big><a class="headerlink" href="#processparser.startJS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the Google Chart Tools pie chart Javascript code on process information pages where at least one supplier supports that process</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>thelist</strong> &#8211; A list in format [&#8216;Suppliers with processTitle&#8217;, int number_with_process]</li>
-<li><strong>thelist2</strong> &#8211; A list in format [&#8216;Suppliers without processTitle&#8217;, int number_without_process]</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="processparser.startJSone">
-<tt class="descclassname">processparser.</tt><tt class="descname">startJSone</tt><big>(</big><em>thelist=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#processparser.startJSone" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the Google Chart Tools pie chart Javascript code on process information pages where no suppliers support that process</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>thelist</strong> &#8211; A list in format [&#8216;Suppliers without processTitle&#8217;, int number_without_process]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>workingdict</strong> &#8211; An OrderedDict with at least one entry, where the key is a pie chart heading and the value is the numeric value</td>
 </tr>
 </tbody>
 </table>

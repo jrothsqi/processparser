@@ -1,6 +1,12 @@
 Changelog for processparser
 ===========================
 
+*1.0 revision 03292013-1*
+-------------------------
+
+* Eliminated function startJSOne, replaced with
+ function startJS using an OrderedDict
+
 *1.0 revision 03122013-1*
 -------------------------
 

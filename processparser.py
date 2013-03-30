@@ -1,4 +1,4 @@
-# processparser 1.0 revision 03122013-1
+# processparser 1.0 revision 03292013-1
 
 #   Copyright 2013, Joshua Roth-Colson
 #
@@ -54,6 +54,7 @@ import cherrypy
 import urllib2
 import json
 import pylibmc
+from collections import OrderedDict
 
 # CONFIG SECTION BEGIN
 
@@ -89,7 +90,7 @@ try:
     gtrackfile.close()
 except:
     if debugDisplay:
-        print "DEBUG: Analytics file not found."
+        print("DEBUG: Analytics file not found.")
 
 
 def startHTML(title="ProcessParser"):
@@ -107,14 +108,13 @@ def startHTML(title="ProcessParser"):
     return rethere
 
 
-def startJS(thelist=[], thelist2=[]):
+def startJS(workingdict):
     """
     Generates the Google Chart Tools pie chart Javascript code on process information pages where at least one supplier supports that process
 
-    :param thelist: A list in format ['Suppliers with processTitle', int number_with_process]
-    :param thelist2: A list in format ['Suppliers without processTitle', int number_without_process]
+    :param workingdict: An OrderedDict with at least one entry, where the key is a pie chart heading and the value is the numeric value
     """
-    stringhere = """
+    stringhere = '''
 			<script>
 			google.load('visualization', '1.0', {'packages':['corechart']});
 			google.setOnLoadCallback(drawChart);
@@ -123,48 +123,31 @@ def startJS(thelist=[], thelist2=[]):
 			  data.addColumn('string', 'Key');
 			  data.addColumn('number', 'Suppliers');
 			  data.addRows([
-		     """
-    stringhere += "['%s', %i],['%s', %i]" % (str(thelist[
-                                             0]), int(thelist[1]), str(thelist2[0]), int(thelist2[1]))
+		 '''
+
+    numvals = len(workingdict)
+
+    while workingdict:
+        (key, value) = workingdict.popitem(last=False)
+        stringhere += "['%s', %i]," % (key, value)
+
     addnow = '''
 		 ]);
 		 var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-		 var options = {'pieSliceText':'value','title':'Supplier Data','width':800,'height':400, slices: [{color: 'green'}, {color: '#b72e2e'}]};
+             '''
+
+    if (numvals > 1):
+        addnow += "var options = {'pieSliceText':'value','title':'Supplier Data','width':800,'height':400, slices: [{color: 'green'}, {color: '#b72e2e'}]};"
+    else:
+        addnow += "var options = {'pieSliceText':'value','title':'Supplier Data','width':800,'height':400, slices: [{color: '#b72e2e'}, {color: 'green'}]};"
+
+    addnow +=    '''
 		 chart.draw(data,options);
 		 }
 		 </script>
 		 <div id="chart_div"> </div>
 		 '''
-    stringhere += addnow
-    return stringhere
 
-
-def startJSone(thelist=[]):
-    """
-    Generates the Google Chart Tools pie chart Javascript code on process information pages where no suppliers support that process
-
-    :param thelist: A list in format ['Suppliers without processTitle', int number_without_process]
-    """
-    stringhere = """
-                        <script>
-                        google.load('visualization', '1.0', {'packages':['corechart']});
-                        google.setOnLoadCallback(drawChart);
-                        function drawChart() {
-                          var data = new google.visualization.DataTable();
-                          data.addColumn('string', 'Key');
-                          data.addColumn('number', 'Suppliers');
-                          data.addRows([
-                     """
-    stringhere += "['%s', %i]" % (str(thelist[0]), int(thelist[1]))
-    addnow = '''
-                 ]);
-                 var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-                 var options = {'pieSliceText':'value','title':'Supplier Data','width':800,'height':400, slices: [{color: '#b72e2e'}, {color: 'green'}]};
-                 chart.draw(data,options);
-                 }
-                 </script>
-                 <div id="chart_div"> </div>
-                 '''
     stringhere += addnow
     return stringhere
 
@@ -198,7 +181,7 @@ def restoreMem():
 
     If using the processFile JSON, also adds a memcached entry reflecting the fact that the displayed process information uses stale data
     """
-    print "NOTICE: Regenerating Memcached Entries"
+    print("NOTICE: Regenerating Memcached Entries")
     mc = pylibmc.Client(["127.0.0.1"], binary=True)
     try:
         thereq = urllib2.urlopen(
@@ -215,9 +198,10 @@ def restoreMem():
                 updateHandle.write(rawjson)
                 updateHandle.close()
                 basejson = thejson
-                print "NOTICE: processFile updated successfully."
+                print("NOTICE: processFile updated successfully.")
             except:
-                print "WARNING: Attempted to write processFile, but could not. Permissions error?"
+                print(
+                    "WARNING: Attempted to write processFile, but could not. Permissions error?")
     except:
         thejson = basejson
         stale = "yes"
@@ -342,18 +326,19 @@ class viewdex:
                 if addthis == "":
                     addthis = "None /"
                 retval = retval + "<br /><b>Children:</b> " + addthis[:-2]
+                dicttopass = OrderedDict()
                 if text == 0:
                     thehasnot = "Suppliers Without " + \
                         title + " (" + str(numtotal) + ")"
-                    dicthere = [thehasnot, int(numtotal)]
-                    retval += startJSone(dicthere)
+                    dicttopass[thehasnot] = int(mctest)
+                    retval += startJS(dicttopass)
                 else:
                     thehas = "Suppliers With " + title + " (" + str(text) + ")"
                     thehasnot = "Suppliers Without " + \
                         title + " (" + str(remain) + ")"
-                    dicthere = [thehas, int(text)]
-                    dicthere2 = [thehasnot, int(remain)]
-                    retval += startJS(dicthere, dicthere2)
+                    dicttopass[thehas] = int(text)
+                    dicttopass[thehasnot] = int(remain)
+                    retval += startJS(dicttopass)
                 return startout + retval + addstale + endout
         return "Invalid Key"
     index.exposed = True
